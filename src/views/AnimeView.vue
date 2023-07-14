@@ -4,12 +4,14 @@ import axios from "axios";
 import { ref } from "vue";
 
 let dataAxios = ref([])
+// let validation = ref(false)
 
 async function Test() {
   await axios.get("http://localhost:3000/app/animes")
    .then((response) => {
-    console.log(response);
-      dataAxios.value = response.data;
+     console.log(response);
+    // validation = true
+      dataAxios.value = response.data.data;
       dataAxios = dataAxios.value
     })
     .catch((error) => {
@@ -25,8 +27,8 @@ Test();
             <h1>ANIME</h1>
         </div>
         <div class="grid-animes">
-            <Anime v-for="item in dataAxios" :ref="dataAxios" :key="item.id" :title="item.title" :imgUrl="item.imgUrl"
-            :shortDescription="item.shortDescription"/>
+            <Anime  v-for="item in dataAxios" :ref="dataAxios" :key="item.id" :name="item.name" :img="item.img"
+            :description="item.description"/>
         </div>
         </div>
 </template>
@@ -35,7 +37,7 @@ Test();
 .anime {
     display: flex;
     flex-direction: column;
-    width: 99vw;
+    width:100%;
     height: auto;
     gap: 20vh;
     /* border: #FFC85E solid 1px; */
@@ -46,7 +48,8 @@ Test();
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 99vw;
+    width: 95.5vw;
+    margin: auto 0;
     height: 10vh;
     /* position: sticky; */
 }

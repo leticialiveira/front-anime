@@ -1,9 +1,8 @@
 <script setup>
 defineProps({
-        title: String,
-        imgUrl:String,
-        year: Number,
-        shortDescription: String
+        name: String,
+        img:String,
+        description: String
     })
 
 
@@ -13,12 +12,12 @@ defineProps({
         <article>
             <div class="card-anime">
                 <!-- <img src="../assets/image 3.png" alt=""> -->
-                <img :src="imgUrl" alt="">
+                <img :src="img" alt="">
                 <div class="back">
                     <!-- <h2>One Piece</h2> -->
-                    <h2>{{ title }}</h2>
+                    <h2>{{ name }}</h2>
                     <!-- <p>Monkey D. Luffy e sua tripulação de piratas embarcam em uma busca épica em busca do tesouro supremo, conhecido como One Piece, e para se tornar o Rei dos Piratas.</p> -->
-                <p>{{ shortDescription }}</p>    
+                <p>{{ description }}</p>    
                 </div>
             </div>
         </article>
@@ -105,6 +104,12 @@ article {
 
         }
     }
+}
+
+.card-anime img {
+    width: 309px;
+    height: 400px;
+    border: inset 2px rgba(36, 122, 139, 1);
 }
 
 </style>

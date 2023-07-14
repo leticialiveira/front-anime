@@ -1,146 +1,94 @@
 <script setup>
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
-import InputMask from 'primevue/inputmask';
+import { ref } from 'vue';
+import axios from 'axios';
+
+let data = ref({
+  email: "",
+  user: "",
+  phone: "",
+  password: ""
+})
+
+async function Register(){
+  await axios.post("http://localhost:3000/app/user", data.value)
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  console.log(data.value);
+}
+
+
 
 </script>
 
 <template>
-  <div class="card-login">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+  <div class="body">
+
+    <div class="card-login">
+      
     <div class="title">
       <h1>Anime</h1>
     </div>
 
-    <div class="login">
+    <form @submit.prevent="Register" class="login">
       <h2>Cadastro de novo usuário</h2>
 
       <div class="form">
-        <label for="phone">Email *</label>
-        <InputMask v-model="value2" date="phone"  placeholder="*******@***.***" />
+        <label for="email">Email *</label>
+        <InputText v-model="data.email" date="email"  placeholder="*******@***.***" />
       </div>
 
       <div class="form">
-        <label for="username">Usuário * </label>
-        <InputText id="username" v-model="value" placeholder="Ex: leticialiveira"/>
+        <label for="user">Usuário * </label>
+        <InputText id="user" v-model="data.user" placeholder="Ex: leticialiveira"/>
       </div>
 
       <div class="form">
         <label for="phone">Telefone *</label>
-        <InputMask v-model="value2" date="phone" mask="(99) 9 9999-9999" placeholder="(99) 9 9999-9999" />
+        <InputText v-model="data.phone"  placeholder="(99) 9 9999-9999" />
       </div>
 
       <div class="form">
         <label for="password">Senha *</label>
-        <Password v-model="value" :feedback="false" placeholder="*******"/>
+        <Password v-model="data.password" :feedback="false" placeholder="*******"/>
       </div>
-      <button>
-        ENTRAR</button>
+      <button type="submit">
+        REGISTRAR</button>
       <div class="register">
         <p>Ainda não tem uma conta? </p>
         <a href="">Cadastre aqui!</a>
       </div>
+    </form>
     </div>
-
-  </div>
+</div>
 </template>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Megrim&family=Rubik+Pixels&family=Rye&family=Unna&display=swap');
 
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 .card-login {
   background-color: #151515;
-  width: 160%;
+  width: 20%;
   height: auto;
   border: solid 1px #FFC85E;
   position: relative;
+  overflow: hidden;
 }
 
-.card-login span:nth-of-type(1) {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(to right, transparent, rgba(36, 122, 139, 1));
-  animation: animar1 5s linear infinite;
-}
-
-@keyframes animar1 {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.card-login span:nth-of-type(2) {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, rgba(36, 122, 139, 1));
-  animation: animar2 linear infinite 5s;
-  animation-delay: 2.5s;
-}
-
-@keyframes animar2 {
-  0% {
-    transform: translateY(-100%);
-  }
-
-  100% {
-    transform: translateY(100%);
-
-  }
-}
-
-.card-login span:nth-of-type(3) {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(to left, transparent, rgba(36, 122, 139, 1));
-  animation: animar3 5s infinite linear;
-}
-
-@keyframes animar3 {
-  0% {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.card-login span:nth-of-type(4) {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(to top, transparent, rgba(36, 122, 139, 1));
-  animation: animar4 5s infinite linear;
-  animation-delay: 2.5s;
-}
-
-@keyframes animar4 {
-  0% {
-    transform: translateY(100%);
-  }
-
-  100% {
-    transform: translateY(-100%);
-  }
-}
 
 .title {
   background-color: rgba(36, 122, 139, 1);
