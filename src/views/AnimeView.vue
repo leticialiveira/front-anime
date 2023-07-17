@@ -4,19 +4,25 @@ import axios from "axios";
 import { ref } from "vue";
 
 let dataAxios = ref([])
+let validacao = ref(false)
+console.log(validacao);
+console.log(validacao.value);
 
 async function Test() {
   await axios.get("http://localhost:3000/app/animes")
    .then((response) => {
-    console.log(response);
-      dataAxios.value = response.data;
-      dataAxios = dataAxios.value
+      validacao.value = true
+      validacao = validacao.value
+      console.log(validacao);
+      dataAxios = response.data.data;
+      console.log(dataAxios);
     })
     .catch((error) => {
       console.log(error);
     });
-}
-Test();
+  }
+  await Test();
+console.log(dataAxios);
 </script>
 
 <template>
@@ -25,9 +31,9 @@ Test();
             <h1>ANIME</h1>
         </div>
         <div class="grid-animes">
-            <Anime v-for="item in dataAxios" :ref="dataAxios" :key="item.id" :title="item.title" :imgUrl="item.imgUrl"
-            :shortDescription="item.shortDescription"/>
-        </div>
+            <Anime  v-if="validacao" v-for="item in dataAxios" :ref="dataAxios" :key="item.id" :name="item.name" :img="item.img"
+            :description="item.description"/>
+          </div>
         </div>
 </template>
 
