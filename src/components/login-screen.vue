@@ -1,12 +1,16 @@
 <script setup>
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
+import { RouterLink, RouterView } from 'vue-router'
+
 
 </script>
 
 <template>
-  <div class="card-login">
-    <span></span>
+  <div class="body">
+
+    <div class="card-login">
+      <span></span>
     <span></span>
     <span></span>
     <span></span>
@@ -21,28 +25,40 @@ import Password from 'primevue/password';
         <label for="username">Usuário</label>
         <InputText id="username" v-model="value" />
       </div>
-      
+
       <div class="form">
         <label for="password">Senha</label>
-        <Password v-model="value"  :feedback="false" />
+        <Password v-model="value" :feedback="false" />
       </div>
-      <button>
-        ENTRAR</button>
+
+      <RouterLink to="/anime"><button>
+          ENTRAR</button></RouterLink>
+
       <div class="register">
         <p>Ainda não tem uma conta? </p>
-        <a href="">Cadastre aqui!</a>
+        <RouterLink to="/cadastro"><a href="">Cadastre aqui!</a></RouterLink>
       </div>
     </div>
-
+    
   </div>
+</div>
 </template>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Megrim&family=Rubik+Pixels&family=Rye&family=Unna&display=swap');
 
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 .card-login {
   background-color: #151515;
-  width: 130%;
+  width: 20%;
   height: auto;
   border: solid 1px #FFC85E;
   position: relative;
@@ -182,13 +198,19 @@ import Password from 'primevue/password';
 .form Password {
   background: #FFC85E;
 }
+
 button {
-  width: 35%;
+  width: 120%;
   height: 4vh;
-  border: solid 0.1px rgba(36, 122, 139, 1);
+  border: solid 0.1px #636363;
   border-radius: 10px;
   background-color: #FFC85E;
   color: #636363;
+}
+
+button:active {
+  border: solid 1px white;
+  color: rgba(36, 122, 139, 1);
 }
 
 .register {

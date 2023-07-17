@@ -106,4 +106,10 @@ article {
     }
 }
 
+.card-anime img {
+    width: 309px;
+    height: 400px;
+    border: inset 2px rgba(36, 122, 139, 1);
+}
+
 </style>
